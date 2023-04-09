@@ -7,12 +7,17 @@ FetchContent_Declare(SFML
     GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(CMakeSFMLProject src/main.cpp)
-target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
-target_compile_features(CMakeSFMLProject PRIVATE cxx_std_17)
+include_directories(include)
+
+file(GLOB TETRIS "src/tetris/main.cpp" "src/tetris/**/*.cpp" "src/tetris/**/**/*.cpp")
+
+add_executable(Tetris ${TETRIS})
+
+target_link_libraries(Tetris PRIVATE sfml-graphics)
+target_compile_features(Tetris PRIVATE cxx_std_17)
 if (WIN32 AND BUILD_SHARED_LIBS)
-    add_custom_command(TARGET CMakeSFMLProject POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:CMakeSFMLProject> $<TARGET_FILE_DIR:CMakeSFMLProject> COMMAND_EXPAND_LISTS)
+    add_custom_command(TARGET Tetris POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:Tetris> $<TARGET_FILE_DIR:Tetris> COMMAND_EXPAND_LISTS)
 endif()
 
-install(TARGETS CMakeSFMLProject)
+install(TARGETS Tetris)

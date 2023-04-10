@@ -1,6 +1,7 @@
 build
 out
 ikan
+external
 .cache
 .idea
 .vs

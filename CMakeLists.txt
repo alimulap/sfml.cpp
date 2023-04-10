@@ -8,12 +8,16 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 include_directories(include)
+#link_directories(external/lib)
+
+file(GLOB COMMON "src/handler/*.cpp")
 
 file(GLOB TETRIS "src/tetris/main.cpp" "src/tetris/**/*.cpp" "src/tetris/**/**/*.cpp")
 
-add_executable(Tetris ${TETRIS})
+add_executable(Tetris ${TETRIS} ${COMMON})
 
-target_link_libraries(Tetris PRIVATE sfml-graphics)
+#target_link_libraries(Tetris dwmapi)
+target_link_libraries(Tetris PRIVATE sfml-graphics dwmapi)
 target_compile_features(Tetris PRIVATE cxx_std_17)
 if (WIN32 AND BUILD_SHARED_LIBS)
     add_custom_command(TARGET Tetris POST_BUILD

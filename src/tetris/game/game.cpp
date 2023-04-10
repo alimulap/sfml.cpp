@@ -7,18 +7,17 @@ void Game::initVariables()
 void Game::initWindows()
 {
     this->videoMode = sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT);
-    this->window = std::make_shared<sf::RenderWindow>(this->videoMode, "testCmake", sf::Style::Titlebar | sf::Style::Close);
+    this->window = std::make_shared<sf::RenderWindow>(this->videoMode, "  Tetris", sf::Style::None);
+    Handler::enableBlurBehindWindow(this->window->getSystemHandle());
 }
 
 Game::Game()
 {
-    this->initVariables();
     this->initWindows();
+    this->initVariables();
 }
 
-Game::~Game()
-{
-}
+Game::~Game() { }
 
 const bool Game::isRunning() const
 {
@@ -51,9 +50,15 @@ void Game::update()
 
 void Game::render()
 {
-    this->window->clear(sf::Color::White);
+    this->window->clear(sf::Color::Transparent);
 
-    this->a.render(window);
+    this->a->render(window);
+    this->b->render(window);
+    this->c->render(window);
+    this->d->render(window);
+    this->e->render(window);
+    this->f->render(window);
+    this->g->render(window);
 
     this->window->display();
 }

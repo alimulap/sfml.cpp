@@ -7,11 +7,13 @@ void Game::initVariables()
 void Game::initWindows()
 {
     this->videoMode = sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT);
-    this->window = std::make_shared<sf::RenderWindow>(this->videoMode, "  Tetris", sf::Style::None);
+    this->settings.antialiasingLevel = 3.0;
+    this->window = std::make_shared<sf::RenderWindow>(this->videoMode, "  Tetris", sf::Style::Titlebar, this->settings);
     Handler::enableBlurBehindWindow(this->window->getSystemHandle());
 }
 
 Game::Game()
+    : matrix(sf::Vector2f(60., 60.))
 {
     this->initWindows();
     this->initVariables();
@@ -59,6 +61,8 @@ void Game::render()
     this->e->render(window);
     this->f->render(window);
     this->g->render(window);
+
+    this->matrix.render(this->window);
 
     this->window->display();
 }

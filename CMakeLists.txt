@@ -10,7 +10,7 @@ FetchContent_MakeAvailable(SFML)
 include_directories(include)
 #link_directories(external/lib)
 
-file(GLOB COMMON "src/handler/*.cpp")
+file(GLOB COMMON "src/handler/*.cpp" "src/util/*.cpp")
 
 file(GLOB TETRIS "src/tetris/main.cpp" "src/tetris/**/*.cpp" "src/tetris/**/**/*.cpp")
 

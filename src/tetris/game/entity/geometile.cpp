@@ -22,6 +22,7 @@ namespace Geometile
         return this->position; }
 
     void Zigga::setPosition(sf::Vector2f position) {
+        this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
 

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "tetris/game.hpp"
 
 void Game::initVariables()
@@ -13,7 +14,6 @@ void Game::initWindows()
 }
 
 Game::Game()
-    : matrix(sf::Vector2f(60., 60.))
 {
     this->initWindows();
     this->initVariables();
@@ -48,21 +48,14 @@ void Game::pollEvent()
 void Game::update() 
 {
     this->pollEvent();
+    this->state->update();
 }
 
 void Game::render()
 {
     this->window->clear(sf::Color::Transparent);
-
-    this->a->render(window);
-    this->b->render(window);
-    this->c->render(window);
-    this->d->render(window);
-    this->e->render(window);
-    this->f->render(window);
-    this->g->render(window);
-
-    this->matrix.render(this->window);
+    
+    this->state->render(this->window);
 
     this->window->display();
 }

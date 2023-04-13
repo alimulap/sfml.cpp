@@ -33,8 +33,8 @@ const sf::Vector2f& Matrix::getPosition() {
 
 void Matrix::render(const std::shared_ptr<sf::RenderTarget>& window) 
 {
+    window->draw(this->border);
     for (const auto& i : this->metrices)
         window->draw(i); 
-    window->draw(this->border);
 }
 

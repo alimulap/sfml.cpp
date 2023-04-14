@@ -22,7 +22,7 @@ private:
     void initMetrices();
 
 public:
-    Matrix(sf::Vector2f pos);
+    Matrix(const sf::Vector2f& pos);
     ~Matrix();
 
     void fillWithGeometile(const Geometile::Geometile& geometile);

@@ -28,7 +28,7 @@ private:
 
 public:
     //Tile();
-    Tile(sf::Vector2f initPos, sf::Vector2f size, sf::Color color, sf::Vector2f origin);
+    Tile(const sf::Vector2f& initPos, const sf::Vector2f& size, sf::Color color, const sf::Vector2f& origin);
     ~Tile();
     
     //\> position + (size * origin)

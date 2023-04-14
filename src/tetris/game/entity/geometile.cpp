@@ -1,4 +1,5 @@
 #include "tetris/entity/geometile.hpp"
+#include "tetris/constants.hpp"
 
 namespace Geometile
 {
@@ -6,12 +7,12 @@ namespace Geometile
 
     Geometile::~Geometile() { }
 
-    Zigga::Zigga(sf::Vector2f position, sf::Vector2f size)
+    Zigga::Zigga(const sf::Vector2f& position, const sf::Vector2f& size)
         : position(position),
-        tiles{Tile(position, size, sf::Color::Red, sf::Vector2f( 0., 1.)),
-              Tile(position, size, sf::Color::Red, sf::Vector2f( 1., 1.)),
-              Tile(position, size, sf::Color::Red, sf::Vector2f( 1., 2.)),
-              Tile(position, size, sf::Color::Red, sf::Vector2f( 2., 2.))} { }
+        tiles{Tile(position, size, sf::Color::Red, VF01),
+              Tile(position, size, sf::Color::Red, VF11),
+              Tile(position, size, sf::Color::Red, VF12),
+              Tile(position, size, sf::Color::Red, VF22)} { }
 
     Zigga::~Zigga() { }
 
@@ -29,34 +30,33 @@ namespace Geometile
     void Zigga::rotate(short dir) 
     {
         this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) :
-                                this->rot;
+                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
 
         switch (this->rot)
         {
         case Rotation::r0:
-            this->tiles[0].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 2.));
+            this->tiles[0].setOrigin(VF01);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF12);
+            this->tiles[3].setOrigin(VF22);
             break;
         case Rotation::r90:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 2.));
+            this->tiles[0].setOrigin(VF10);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF01);
+            this->tiles[3].setOrigin(VF02);
             break;
         case Rotation::r180:
-            this->tiles[0].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 0.));
+            this->tiles[0].setOrigin(VF21);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF10);
+            this->tiles[3].setOrigin(VF00);
             break;
         case Rotation::r270:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 0.));
+            this->tiles[0].setOrigin(VF12);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF21);
+            this->tiles[3].setOrigin(VF20);
             break;
         }
     }
@@ -72,46 +72,45 @@ namespace Geometile
             tile.render(window);
     }
 
-    Sarru::Sarru(sf::Vector2f position, sf::Vector2f size)
+    Sarru::Sarru(const sf::Vector2f& position, const sf::Vector2f& size)
         : position(position),
-        tiles{Tile(position, size, sf::Color::Green, sf::Vector2f( 0., 1.)),
-              Tile(position, size, sf::Color::Green, sf::Vector2f( 1., 1.)),
-              Tile(position, size, sf::Color::Green, sf::Vector2f( 1., 0.)),
-              Tile(position, size, sf::Color::Green, sf::Vector2f( 2., 0.))} { }
+        tiles{Tile(position, size, sf::Color::Green, VF01),
+              Tile(position, size, sf::Color::Green, VF11),
+              Tile(position, size, sf::Color::Green, VF10),
+              Tile(position, size, sf::Color::Green, VF20)} { }
 
     Sarru::~Sarru() { }
 
     void Sarru::rotate(short dir) 
     { 
         this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) :
-                                this->rot;
+                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
 
         switch (this->rot)
         {
         case Rotation::r0:
-            this->tiles[0].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 2.));
+            this->tiles[0].setOrigin(VF01);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF10);
+            this->tiles[3].setOrigin(VF20);
             break;
         case Rotation::r90:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 2.));
+            this->tiles[0].setOrigin(VF10);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF21);
+            this->tiles[3].setOrigin(VF22);
             break;
         case Rotation::r180:
-            this->tiles[0].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 0.));
+            this->tiles[0].setOrigin(VF21);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF12);
+            this->tiles[3].setOrigin(VF02);
             break;
         case Rotation::r270:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 0.));
+            this->tiles[0].setOrigin(VF12);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF01);
+            this->tiles[3].setOrigin(VF00);
             break;
         }
     }
@@ -138,46 +137,45 @@ namespace Geometile
             tile.render(window);
     }
 
-    Jagga::Jagga(sf::Vector2f position, sf::Vector2f size)
+    Jagga::Jagga(const sf::Vector2f& position, const sf::Vector2f& size)
         : position(position),
-        tiles{Tile(position, size, sf::Color::Blue, sf::Vector2f( 1., 0.)),
-              Tile(position, size, sf::Color::Blue, sf::Vector2f( 1., 1.)),
-              Tile(position, size, sf::Color::Blue, sf::Vector2f( 1., 2.)),
-              Tile(position, size, sf::Color::Blue, sf::Vector2f( 0., 2.))} { }
+        tiles{Tile(position, size, sf::Color::Blue, VF10),
+              Tile(position, size, sf::Color::Blue, VF11),
+              Tile(position, size, sf::Color::Blue, VF12),
+              Tile(position, size, sf::Color::Blue, VF02)} { }
 
     Jagga::~Jagga() { }
 
     void Jagga::rotate(short dir) 
     {
         this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) :
-                                this->rot;
+                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
 
         switch (this->rot)
         {
         case Rotation::r0:
-            this->tiles[0].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 2.));
+            this->tiles[0].setOrigin(VF10);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF12);
+            this->tiles[3].setOrigin(VF02);
             break;
         case Rotation::r90:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 2.));
+            this->tiles[0].setOrigin(VF21);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF01);
+            this->tiles[3].setOrigin(VF00);
             break;
         case Rotation::r180:
-            this->tiles[0].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 0.));
+            this->tiles[0].setOrigin(VF12);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF10);
+            this->tiles[3].setOrigin(VF20);
             break;
         case Rotation::r270:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 0.));
+            this->tiles[0].setOrigin(VF01);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF21);
+            this->tiles[3].setOrigin(VF22);
             break;
         }
     }
@@ -204,46 +202,45 @@ namespace Geometile
             tile.render(window);
     }
 
-    Lirru::Lirru(sf::Vector2f position, sf::Vector2f size)
+    Lirru::Lirru(const sf::Vector2f& position, const sf::Vector2f& size)
         : position(position),
-        tiles{Tile(position, size, sf::Color(255, 165, 0), sf::Vector2f( 1., 0.)),
-              Tile(position, size, sf::Color(255, 165, 0), sf::Vector2f( 1., 1.)),
-              Tile(position, size, sf::Color(255, 165, 0), sf::Vector2f( 1., 2.)),
-              Tile(position, size, sf::Color(255, 165, 0), sf::Vector2f( 2., 2.))} { }
+        tiles{Tile(position, size, sf::Color(255, 165, 0), VF10),
+              Tile(position, size, sf::Color(255, 165, 0), VF11),
+              Tile(position, size, sf::Color(255, 165, 0), VF12),
+              Tile(position, size, sf::Color(255, 165, 0), VF22)} { }
 
     Lirru::~Lirru() { }
 
     void Lirru::rotate(short dir) 
     {
         this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) :
-                                this->rot;
+                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
 
         switch (this->rot)
         {
         case Rotation::r0:
-            this->tiles[0].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 2.));
+            this->tiles[0].setOrigin(VF10);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF12);
+            this->tiles[3].setOrigin(VF22);
             break;
         case Rotation::r90:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 2.));
+            this->tiles[0].setOrigin(VF21);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF01);
+            this->tiles[3].setOrigin(VF02);
             break;
         case Rotation::r180:
-            this->tiles[0].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 0.));
+            this->tiles[0].setOrigin(VF12);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF10);
+            this->tiles[3].setOrigin(VF00);
             break;
         case Rotation::r270:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 0.));
+            this->tiles[0].setOrigin(VF01);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF21);
+            this->tiles[3].setOrigin(VF20);
             break;
         }
     }
@@ -270,46 +267,45 @@ namespace Geometile
             tile.render(window);
     }
 
-    Terru::Terru(sf::Vector2f position, sf::Vector2f size)
+    Terru::Terru(const sf::Vector2f& position, const sf::Vector2f& size)
         : position(position),
-        tiles{Tile(position, size, sf::Color(255, 0, 255), sf::Vector2f( 0., 1.)),
-              Tile(position, size, sf::Color(255, 0, 255), sf::Vector2f( 1., 1.)),
-              Tile(position, size, sf::Color(255, 0, 255), sf::Vector2f( 2., 1.)),
-              Tile(position, size, sf::Color(255, 0, 255), sf::Vector2f( 1., 2.))} { }
+        tiles{Tile(position, size, sf::Color(255, 0, 255), VF01),
+              Tile(position, size, sf::Color(255, 0, 255), VF11),
+              Tile(position, size, sf::Color(255, 0, 255), VF21),
+              Tile(position, size, sf::Color(255, 0, 255), VF12)} { }
 
     Terru::~Terru() { }
 
     void Terru::rotate(short dir) 
     {
         this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) :
-                                this->rot;
+                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
 
         switch (this->rot)
         {
         case Rotation::r0:
-            this->tiles[0].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 2.));
+            this->tiles[0].setOrigin(VF01);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF21);
+            this->tiles[3].setOrigin(VF12);
             break;
         case Rotation::r90:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 2.));
+            this->tiles[0].setOrigin(VF10);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF12);
+            this->tiles[3].setOrigin(VF01);
             break;
         case Rotation::r180:
-            this->tiles[0].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 0.));
+            this->tiles[0].setOrigin(VF21);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF01);
+            this->tiles[3].setOrigin(VF10);
             break;
         case Rotation::r270:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 0.));
+            this->tiles[0].setOrigin(VF12);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF10);
+            this->tiles[3].setOrigin(VF21);
             break;
         }
     }
@@ -336,46 +332,45 @@ namespace Geometile
             tile.render(window);
     }
 
-    Iggu::Iggu(sf::Vector2f position, sf::Vector2f size)
+    Iggu::Iggu(const sf::Vector2f& position, const sf::Vector2f& size)
         : position(position),
-        tiles{Tile(position, size, sf::Color::Cyan, sf::Vector2f( 0., 2.)),
-              Tile(position, size, sf::Color::Cyan, sf::Vector2f( 1., 2.)),
-              Tile(position, size, sf::Color::Cyan, sf::Vector2f( 2., 2.)),
-              Tile(position, size, sf::Color::Cyan, sf::Vector2f( 3., 2.))} { }
+        tiles{Tile(position, size, sf::Color::Cyan, VF02),
+              Tile(position, size, sf::Color::Cyan, VF12),
+              Tile(position, size, sf::Color::Cyan, VF22),
+              Tile(position, size, sf::Color::Cyan, VF32)} { }
 
     Iggu::~Iggu() { }
 
     void Iggu::rotate(short dir) 
     {
         this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) :
-                                this->rot;
+                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
 
         switch (this->rot)
         {
         case Rotation::r0:
-            this->tiles[0].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 2.));
+            this->tiles[0].setOrigin(VF02);
+            this->tiles[1].setOrigin(VF12);
+            this->tiles[2].setOrigin(VF22);
+            this->tiles[3].setOrigin(VF32);
             break;
         case Rotation::r90:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 2.));
+            this->tiles[0].setOrigin(VF10);
+            this->tiles[1].setOrigin(VF11);
+            this->tiles[2].setOrigin(VF12);
+            this->tiles[3].setOrigin(VF13);
             break;
         case Rotation::r180:
-            this->tiles[0].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 0.));
+            this->tiles[0].setOrigin(VF31);
+            this->tiles[1].setOrigin(VF21);
+            this->tiles[2].setOrigin(VF11);
+            this->tiles[3].setOrigin(VF01);
             break;
         case Rotation::r270:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 0.));
+            this->tiles[0].setOrigin(VF23);
+            this->tiles[1].setOrigin(VF22);
+            this->tiles[2].setOrigin(VF21);
+            this->tiles[3].setOrigin(VF20);
             break;
         }
     }
@@ -402,48 +397,47 @@ namespace Geometile
             tile.render(window);
     }
 
-    Orra::Orra(sf::Vector2f position, sf::Vector2f size)
+    Orra::Orra(const sf::Vector2f& position, const sf::Vector2f& size)
         : position(position),
-        tiles{Tile(position, size, sf::Color::Yellow, sf::Vector2f( 0., 0.)),
-              Tile(position, size, sf::Color::Yellow, sf::Vector2f( 1., 0.)),
-              Tile(position, size, sf::Color::Yellow, sf::Vector2f( 1., 1.)),
-              Tile(position, size, sf::Color::Yellow, sf::Vector2f( 0., 1.))} { }
+        tiles{Tile(position, size, sf::Color::Yellow, VF00),
+              Tile(position, size, sf::Color::Yellow, VF10),
+              Tile(position, size, sf::Color::Yellow, VF11),
+              Tile(position, size, sf::Color::Yellow, VF01)} { }
 
     Orra::~Orra() { }
 
     void Orra::rotate(short dir) 
     {
         this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) :
-                                this->rot;
+                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
 
-        switch (this->rot)
-        {
-        case Rotation::r0:
-            this->tiles[0].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 2.));
-            break;
-        case Rotation::r90:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 0., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 2.));
-            break;
-        case Rotation::r180:
-            this->tiles[0].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 1., 0.));
-            this->tiles[3].setOrigin(sf::Vector2f( 0., 0.));
-            break;
-        case Rotation::r270:
-            this->tiles[0].setOrigin(sf::Vector2f( 1., 2.));
-            this->tiles[1].setOrigin(sf::Vector2f( 1., 1.));
-            this->tiles[2].setOrigin(sf::Vector2f( 2., 1.));
-            this->tiles[3].setOrigin(sf::Vector2f( 2., 0.));
-            break;
-        }
+        //switch (this->rot)
+        //{
+        //case Rotation::r0:
+        //    this->tiles[0].setOrigin(VF01);
+        //    this->tiles[1].setOrigin(VF11);
+        //    this->tiles[2].setOrigin(VF12);
+        //    this->tiles[3].setOrigin(VF22);
+        //    break;
+        //case Rotation::r90:
+        //    this->tiles[0].setOrigin(VF10);
+        //    this->tiles[1].setOrigin(VF11);
+        //    this->tiles[2].setOrigin(VF01);
+        //    this->tiles[3].setOrigin(VF02);
+        //    break;
+        //case Rotation::r180:
+        //    this->tiles[0].setOrigin(VF21);
+        //    this->tiles[1].setOrigin(VF11);
+        //    this->tiles[2].setOrigin(VF10);
+        //    this->tiles[3].setOrigin(VF00);
+        //    break;
+        //case Rotation::r270:
+        //    this->tiles[0].setOrigin(VF12);
+        //    this->tiles[1].setOrigin(VF11);
+        //    this->tiles[2].setOrigin(VF21);
+        //    this->tiles[3].setOrigin(VF20);
+        //    break;
+        //}
     }
 
     Geometype Orra::getType() {

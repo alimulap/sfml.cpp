@@ -2,7 +2,7 @@
 
 #include "tetris/constants.hpp"
 
-Matrix::Matrix(sf::Vector2f pos)
+Matrix::Matrix(const sf::Vector2f& pos)
     : position(pos)
 {
     this->initMetrices();

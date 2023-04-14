@@ -57,7 +57,7 @@ namespace Geometile
         Rotation rot = Rotation::r0;
 
     public:
-        Zigga(sf::Vector2f position, sf::Vector2f size);
+        Zigga(const sf::Vector2f& position, const sf::Vector2f& size);
         ~Zigga();
 
         //\> if dir is positive,
@@ -84,7 +84,7 @@ namespace Geometile
         Rotation rot = Rotation::r0;
 
     public:
-        Sarru(sf::Vector2f position, sf::Vector2f size);
+        Sarru(const sf::Vector2f& position, const sf::Vector2f& size);
         ~Sarru();
 
         //\> if dir is positive,
@@ -111,7 +111,7 @@ namespace Geometile
         Rotation rot = Rotation::r0;
 
     public:
-        Jagga(sf::Vector2f position, sf::Vector2f size);
+        Jagga(const sf::Vector2f& position, const sf::Vector2f& size);
         ~Jagga();
 
         //\> if dir is positive,
@@ -138,7 +138,7 @@ namespace Geometile
         Rotation rot = Rotation::r0;
 
     public:
-        Lirru(sf::Vector2f position, sf::Vector2f size);
+        Lirru(const sf::Vector2f& position, const sf::Vector2f& size);
         ~Lirru();
 
         //\> if dir is positive,
@@ -165,7 +165,7 @@ namespace Geometile
         Rotation rot = Rotation::r0;
 
     public:
-        Terru(sf::Vector2f position, sf::Vector2f size);
+        Terru(const sf::Vector2f& position, const sf::Vector2f& size);
         ~Terru();
 
         //\> if dir is positive,
@@ -192,7 +192,7 @@ namespace Geometile
         Rotation rot = Rotation::r0;
 
     public:
-        Iggu(sf::Vector2f position, sf::Vector2f size);
+        Iggu(const sf::Vector2f& position, const sf::Vector2f& size);
         ~Iggu();
 
         //\> if dir is positive,
@@ -219,7 +219,7 @@ namespace Geometile
         Rotation rot = Rotation::r0;
 
     public:
-        Orra(sf::Vector2f position, sf::Vector2f size);
+        Orra(const sf::Vector2f& position, const sf::Vector2f& size);
         ~Orra();
 
         //\> if dir is positive,

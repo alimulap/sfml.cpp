@@ -58,7 +58,7 @@ void Tile::adjustVerticesPos()
     this->vertecies[19].position = this->position + this->size * P8;
 }
 
-Tile::Tile(sf::Vector2f initPos, sf::Vector2f size, sf::Color color, sf::Vector2f origin) 
+Tile::Tile(const sf::Vector2f& initPos, const sf::Vector2f& size, sf::Color color, const sf::Vector2f& origin) 
 {
     this->origin = origin;
     this->position = initPos + origin * size;

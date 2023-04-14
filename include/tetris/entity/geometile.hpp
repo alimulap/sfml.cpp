@@ -42,7 +42,7 @@ namespace Geometile
         virtual Geometype getType() = 0;
 
         virtual sf::Vector2f getPosition() = 0;
-        virtual void setPosition(sf::Vector2f position) = 0;
+        virtual void setPosition(const sf::Vector2f& position) = 0;
 
         virtual void update() = 0;
         virtual void render(const std::shared_ptr<sf::RenderTarget>& window) = 0;
@@ -69,7 +69,7 @@ namespace Geometile
         Geometype getType() override;
 
         sf::Vector2f getPosition() override;
-        void setPosition(sf::Vector2f position) override;
+        void setPosition(const sf::Vector2f& position) override;
 
         void update() override;
         void render(const std::shared_ptr<sf::RenderTarget>& window) override;
@@ -96,7 +96,7 @@ namespace Geometile
         Geometype getType() override;
 
         sf::Vector2f getPosition() override;
-        void setPosition(sf::Vector2f position) override;
+        void setPosition(const sf::Vector2f& position) override;
 
         void update() override;
         void render(const std::shared_ptr<sf::RenderTarget>& window) override;
@@ -123,7 +123,7 @@ namespace Geometile
         Geometype getType() override;
 
         sf::Vector2f getPosition() override;
-        void setPosition(sf::Vector2f position) override;
+        void setPosition(const sf::Vector2f& position) override;
 
         void update() override;
         void render(const std::shared_ptr<sf::RenderTarget>& window) override;
@@ -150,7 +150,7 @@ namespace Geometile
         Geometype getType() override;
 
         sf::Vector2f getPosition() override;
-        void setPosition(sf::Vector2f position) override;
+        void setPosition(const sf::Vector2f& position) override;
 
         void update() override;
         void render(const std::shared_ptr<sf::RenderTarget>& window) override;
@@ -177,7 +177,7 @@ namespace Geometile
         Geometype getType() override;
 
         sf::Vector2f getPosition() override;
-        void setPosition(sf::Vector2f position) override;
+        void setPosition(const sf::Vector2f& position) override;
 
         void update() override;
         void render(const std::shared_ptr<sf::RenderTarget>& window) override;
@@ -204,7 +204,7 @@ namespace Geometile
         Geometype getType() override;
 
         sf::Vector2f getPosition() override;
-        void setPosition(sf::Vector2f position) override;
+        void setPosition(const sf::Vector2f& position) override;
 
         void update() override;
         void render(const std::shared_ptr<sf::RenderTarget>& window) override;
@@ -231,7 +231,7 @@ namespace Geometile
         Geometype getType() override;
 
         sf::Vector2f getPosition() override;
-        void setPosition(sf::Vector2f position) override;
+        void setPosition(const sf::Vector2f& position) override;
 
         void update() override;
         void render(const std::shared_ptr<sf::RenderTarget>& window) override;

@@ -21,7 +21,7 @@ namespace Geometile
     sf::Vector2f Zigga::getPosition() {
         return this->position; }
 
-    void Zigga::setPosition(sf::Vector2f position) {
+    void Zigga::setPosition(const sf::Vector2f& position) {
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
@@ -122,7 +122,7 @@ namespace Geometile
     sf::Vector2f Sarru::getPosition() {
         return this->position; }
 
-    void Sarru::setPosition(sf::Vector2f position) {
+    void Sarru::setPosition(const sf::Vector2f& position) {
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
@@ -188,7 +188,7 @@ namespace Geometile
     sf::Vector2f Jagga::getPosition() {
         return this->position; }
 
-    void Jagga::setPosition(sf::Vector2f position) {
+    void Jagga::setPosition(const sf::Vector2f& position) {
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
@@ -254,7 +254,7 @@ namespace Geometile
     sf::Vector2f Lirru::getPosition() {
         return this->position; }
 
-    void Lirru::setPosition(sf::Vector2f position) {
+    void Lirru::setPosition(const sf::Vector2f& position) {
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
@@ -320,7 +320,7 @@ namespace Geometile
     sf::Vector2f Terru::getPosition() {
         return this->position; }
 
-    void Terru::setPosition(sf::Vector2f position) {
+    void Terru::setPosition(const sf::Vector2f& position) {
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
@@ -386,7 +386,7 @@ namespace Geometile
     sf::Vector2f Iggu::getPosition() {
         return this->position; }
 
-    void Iggu::setPosition(sf::Vector2f position) {
+    void Iggu::setPosition(const sf::Vector2f& position) {
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
@@ -452,7 +452,7 @@ namespace Geometile
     sf::Vector2f Orra::getPosition() {
         return this->position; }
 
-    void Orra::setPosition(sf::Vector2f position) {
+    void Orra::setPosition(const sf::Vector2f& position) {
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }

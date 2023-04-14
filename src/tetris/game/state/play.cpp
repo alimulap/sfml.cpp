@@ -1,7 +1,6 @@
 #include "tetris/state/play.hpp"
 #include "SFML/Window/Keyboard.hpp"
 #include "tetris/constants.hpp"
-#include "tetris/entity/tile.hpp"
 #include "util/operator_overload.hpp"
 
 namespace State
@@ -26,21 +25,46 @@ std::optional<std::unique_ptr<State>> Play::getNextState()
         return std::move(this->nextState); 
 }
 
-void Play::pollEvent(const sf::Event& event)
+void Play::pollEvent()
 {
-    switch (event.type) {
-    case sf::Event::KeyPressed:
-        break;
-    default:
-        break;
-    }
 }
 
 void Play::update()
 {
+    //\> move down
     if (this->clock.getElapsedTime().asSeconds() > 1.f) {
         this->clock.restart();
         this->controlled->setPosition(this->controlled->getPosition() + sf::Vector2f(0., TILE_SIZE.y)); }
+
+    //\> move horizontal
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        if (!this->moved) {
+            this->controlled->setPosition(this->controlled->getPosition() + sf::Vector2f( TILE_SIZE.x, 0.));
+            this->moved = true;
+        }
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        if (!this->moved) {
+            this->controlled->setPosition(this->controlled->getPosition() + sf::Vector2f(-TILE_SIZE.x, 0.));
+            this->moved = true;
+        }
+    } else {
+        this->moved = false;
+    }
+
+    //\> move vertical
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        if (!this->rotated) {
+            this->controlled->rotate( 1);
+            this->rotated = true;
+        }
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+        if (!this->rotated) {
+            this->controlled->rotate(-1);
+            this->rotated = true;
+        }
+    } else {
+        this->rotated = false;
+    }
 }
 
 void Play::render(const std::shared_ptr<sf::RenderTarget> &window)

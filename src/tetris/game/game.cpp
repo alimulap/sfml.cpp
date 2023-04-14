@@ -1,4 +1,3 @@
-#include <iostream>
 #include "tetris/game.hpp"
 
 void Game::initVariables()
@@ -36,6 +35,7 @@ void Game::pollEvent()
             this->window->close();
             break;
         case sf::Event::KeyPressed:
+            this->state->pollEvent();
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 				this->window->close();
 			break;

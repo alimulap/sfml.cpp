@@ -1,6 +1,5 @@
 #include "tetris/entity/tile.hpp"
 #include "util/operator_overload.hpp"
-#include <iostream>
 
 void Tile::initVertices()
 {
@@ -30,25 +29,8 @@ void Tile::initVertices()
     this->vertecies[19] = sf::Vertex(this->position + this->size * sf::Vector2f(1.2f, 1.8f), adjustColor(this->color, -20, 4));
 }
 
-Tile::Tile(sf::Vector2f initPos, sf::Vector2f size, sf::Color color, sf::Vector2f origin) 
+void Tile::adjustVerticesPos()
 {
-    this->origin = origin;
-    this->position = initPos + origin * size;
-    this->size = size;
-    this->color = color;
-
-    this->initVertices();
-}
-
-Tile::~Tile() 
-{
-}
-
-void Tile::setPosition(sf::Vector2f pos)
-{
-    std::cout << "b\n";
-    this->position = pos + this->size * this->origin;
-
     this->vertecies[0].position  = this->position + this->size * sf::Vector2f(1.2f, 1.2f);
     this->vertecies[1].position  = this->position + this->size * sf::Vector2f(1.8f, 1.2f);
     this->vertecies[2].position  = this->position + this->size * sf::Vector2f(1.8f, 1.8f);
@@ -75,10 +57,34 @@ void Tile::setPosition(sf::Vector2f pos)
     this->vertecies[19].position = this->position + this->size * sf::Vector2f(1.2f, 1.8f);
 }
 
-void Tile::render(const std::shared_ptr<sf::RenderTarget>& window) 
+Tile::Tile(sf::Vector2f initPos, sf::Vector2f size, sf::Color color, sf::Vector2f origin) 
 {
-    window->draw(this->vertecies, 20, sf::Quads);
+    this->origin = origin;
+    this->position = initPos + origin * size;
+    this->size = size;
+    this->color = color;
+
+    this->initVertices();
 }
+
+Tile::~Tile() 
+{
+}
+
+void Tile::setPosition(const sf::Vector2f& pos) {
+    this->position = pos + this->size * this->origin;
+    this->adjustVerticesPos(); }
+
+void Tile::setOrigin(const sf::Vector2f &newOrigin) 
+{
+    //this->position = this->position - this->size * this->origin + this->size * newOrigin;
+    this->position = this->position - this->size * (this->origin - newOrigin);
+    this->origin = newOrigin; 
+    this->adjustVerticesPos(); 
+}
+
+void Tile::render(const std::shared_ptr<sf::RenderTarget>& window) {
+    window->draw(this->vertecies, 20, sf::Quads); }
 
 sf::Color adjustColor(const sf::Color& color, sf::Int8 relative, sf::Uint8 scale) 
 {

@@ -17,6 +17,14 @@ enum Geometype
     Orra,
 };
 
+enum Rotation 
+{
+    r0,
+    r90,
+    r180,
+    r270,
+};
+
 namespace Geometile
 {
     class Geometile
@@ -24,6 +32,12 @@ namespace Geometile
     public:
         Geometile();
         virtual ~Geometile();
+
+        //\> if dir is positive,
+        //\> geometile will rotate 90 degree
+        //\> if negative rotate -90 degree
+        //\> otherwise will not rotate
+        virtual void rotate(short dir) = 0;
 
         virtual Geometype getType() = 0;
 
@@ -40,9 +54,17 @@ namespace Geometile
         std::array<Tile, 4> tiles;
         sf::Vector2f position;
 
+        Rotation rot = Rotation::r0;
+
     public:
         Zigga(sf::Vector2f position, sf::Vector2f size);
         ~Zigga();
+
+        //\> if dir is positive,
+        //\> geometile will rotate 90 degree
+        //\> if negative rotate -90 degree
+        //\> otherwise will not rotate
+        void rotate(short dir) override;
 
         Geometype getType() override;
 
@@ -59,9 +81,17 @@ namespace Geometile
         std::array<Tile, 4> tiles;
         sf::Vector2f position;
 
+        Rotation rot = Rotation::r0;
+
     public:
         Sarru(sf::Vector2f position, sf::Vector2f size);
         ~Sarru();
+
+        //\> if dir is positive,
+        //\> geometile will rotate 90 degree
+        //\> if negative rotate -90 degree
+        //\> otherwise will not rotate
+        void rotate(short dir) override;
 
         Geometype getType() override;
 
@@ -78,9 +108,17 @@ namespace Geometile
         std::array<Tile, 4> tiles;
         sf::Vector2f position;
 
+        Rotation rot = Rotation::r0;
+
     public:
         Jagga(sf::Vector2f position, sf::Vector2f size);
         ~Jagga();
+
+        //\> if dir is positive,
+        //\> geometile will rotate 90 degree
+        //\> if negative rotate -90 degree
+        //\> otherwise will not rotate
+        void rotate(short dir) override;
 
         Geometype getType() override;
 
@@ -97,9 +135,17 @@ namespace Geometile
         std::array<Tile, 4> tiles;
         sf::Vector2f position;
 
+        Rotation rot = Rotation::r0;
+
     public:
         Lirru(sf::Vector2f position, sf::Vector2f size);
         ~Lirru();
+
+        //\> if dir is positive,
+        //\> geometile will rotate 90 degree
+        //\> if negative rotate -90 degree
+        //\> otherwise will not rotate
+        void rotate(short dir) override;
 
         Geometype getType() override;
 
@@ -116,9 +162,17 @@ namespace Geometile
         std::array<Tile, 4> tiles;
         sf::Vector2f position;
 
+        Rotation rot = Rotation::r0;
+
     public:
         Terru(sf::Vector2f position, sf::Vector2f size);
         ~Terru();
+
+        //\> if dir is positive,
+        //\> geometile will rotate 90 degree
+        //\> if negative rotate -90 degree
+        //\> otherwise will not rotate
+        void rotate(short dir) override;
 
         Geometype getType() override;
 
@@ -135,9 +189,17 @@ namespace Geometile
         std::array<Tile, 4> tiles;
         sf::Vector2f position;
 
+        Rotation rot = Rotation::r0;
+
     public:
         Iggu(sf::Vector2f position, sf::Vector2f size);
         ~Iggu();
+
+        //\> if dir is positive,
+        //\> geometile will rotate 90 degree
+        //\> if negative rotate -90 degree
+        //\> otherwise will not rotate
+        void rotate(short dir) override;
 
         Geometype getType() override;
 
@@ -154,9 +216,17 @@ namespace Geometile
         std::array<Tile, 4> tiles;
         sf::Vector2f position;
 
+        Rotation rot = Rotation::r0;
+
     public:
         Orra(sf::Vector2f position, sf::Vector2f size);
         ~Orra();
+
+        //\> if dir is positive,
+        //\> geometile will rotate 90 degree
+        //\> if negative rotate -90 degree
+        //\> otherwise will not rotate
+        void rotate(short dir) override;
 
         Geometype getType() override;
 

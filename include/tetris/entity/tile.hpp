@@ -24,6 +24,8 @@ private:
 
     void initVertices();
 
+    void adjustVerticesPos();
+
 public:
     //Tile();
     Tile(sf::Vector2f initPos, sf::Vector2f size, sf::Color color, sf::Vector2f origin);
@@ -33,8 +35,9 @@ public:
     //\> if the origin is (0.5, 0.5) 
     //\> setPosition(10., 10.) with size of (10., 10.)
     //\> will actually be (5., 5.)
-    void setPosition(sf::Vector2f pos);
-    void setPosition(float x, float y);
+    void setPosition(const sf::Vector2f& pos);
+
+    void setOrigin(const sf::Vector2f& newOrigin);
     //\> well.. size..
     void setSize();
     //\> render the tile

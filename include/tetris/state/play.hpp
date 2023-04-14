@@ -22,12 +22,15 @@ private:
 
     std::optional<std::unique_ptr<State>> nextState = std::nullopt;
 
+    bool moved = false;
+    bool rotated = false;
+
 public:
     Play();
     ~Play();
 
     std::optional<std::unique_ptr<State>> getNextState() override;
-    void pollEvent(const sf::Event& event) override;
+    void pollEvent() override;
 
     void update() override;
     void render(const std::shared_ptr<sf::RenderTarget>& window) override;

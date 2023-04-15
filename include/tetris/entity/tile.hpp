@@ -38,6 +38,7 @@ public:
     void setPosition(const sf::Vector2f& pos);
 
     void setOrigin(const sf::Vector2f& newOrigin);
+    sf::Vector2f getOrigin();
     //\> well.. size..
     void setSize();
     //\> render the tile

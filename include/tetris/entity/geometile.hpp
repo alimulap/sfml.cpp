@@ -41,6 +41,10 @@ namespace Geometile
 
         virtual Geometype getType() = 0;
 
+        virtual std::array<sf::Vector2f, 4> getOrigins() = 0;
+
+        virtual std::array<Tile, 4> getTiles() = 0;
+
         virtual sf::Vector2f getPosition() = 0;
         virtual void setPosition(const sf::Vector2f& position) = 0;
 
@@ -67,6 +71,10 @@ namespace Geometile
         void rotate(short dir) override;
 
         Geometype getType() override;
+
+        std::array<sf::Vector2f, 4> getOrigins() override;
+
+        std::array<Tile, 4> getTiles() override;
 
         sf::Vector2f getPosition() override;
         void setPosition(const sf::Vector2f& position) override;
@@ -95,6 +103,10 @@ namespace Geometile
 
         Geometype getType() override;
 
+        std::array<sf::Vector2f, 4> getOrigins() override;
+
+        std::array<Tile, 4> getTiles() override;
+
         sf::Vector2f getPosition() override;
         void setPosition(const sf::Vector2f& position) override;
 
@@ -121,6 +133,10 @@ namespace Geometile
         void rotate(short dir) override;
 
         Geometype getType() override;
+
+        std::array<sf::Vector2f, 4> getOrigins() override;
+
+        std::array<Tile, 4> getTiles() override;
 
         sf::Vector2f getPosition() override;
         void setPosition(const sf::Vector2f& position) override;
@@ -149,6 +165,10 @@ namespace Geometile
 
         Geometype getType() override;
 
+        std::array<sf::Vector2f, 4> getOrigins() override;
+
+        std::array<Tile, 4> getTiles() override;
+
         sf::Vector2f getPosition() override;
         void setPosition(const sf::Vector2f& position) override;
 
@@ -175,6 +195,10 @@ namespace Geometile
         void rotate(short dir) override;
 
         Geometype getType() override;
+
+        std::array<sf::Vector2f, 4> getOrigins() override;
+
+        std::array<Tile, 4> getTiles() override;
 
         sf::Vector2f getPosition() override;
         void setPosition(const sf::Vector2f& position) override;
@@ -203,6 +227,10 @@ namespace Geometile
 
         Geometype getType() override;
 
+        std::array<sf::Vector2f, 4> getOrigins() override;
+
+        std::array<Tile, 4> getTiles() override;
+
         sf::Vector2f getPosition() override;
         void setPosition(const sf::Vector2f& position) override;
 
@@ -229,6 +257,10 @@ namespace Geometile
         void rotate(short dir) override;
 
         Geometype getType() override;
+
+        std::array<sf::Vector2f, 4> getOrigins() override;
+
+        std::array<Tile, 4> getTiles() override;
 
         sf::Vector2f getPosition() override;
         void setPosition(const sf::Vector2f& position) override;

@@ -19,11 +19,14 @@ private:
     Matrix matrix;
     std::unique_ptr<Geometile::Geometile> controlled;
     std::unique_ptr<Geometile::Geometile> ghost;
+    std::unique_ptr<Geometile::Geometile> ikan;
 
     std::optional<std::unique_ptr<State>> nextState = std::nullopt;
 
     bool moved = false;
     bool rotated = false;
+
+    void updateGhost();
 
 public:
     Play();

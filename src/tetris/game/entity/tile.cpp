@@ -1,6 +1,7 @@
 #include "tetris/entity/tile.hpp"
 #include "util/operator_overload.hpp"
 #include "tetris/constants.hpp"
+#include <iostream>
 
 void Tile::initVertices()
 {
@@ -83,6 +84,9 @@ void Tile::setOrigin(const sf::Vector2f &newOrigin)
     this->origin = newOrigin; 
     this->adjustVerticesPos(); 
 }
+
+sf::Vector2f Tile::getOrigin() {
+    return this->origin; }
 
 void Tile::render(const std::shared_ptr<sf::RenderTarget>& window) {
     window->draw(this->vertecies, 20, sf::Quads); }

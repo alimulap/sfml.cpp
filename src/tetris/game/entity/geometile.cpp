@@ -27,6 +27,17 @@ namespace Geometile
         for (auto& tile : tiles)
             tile.setPosition(position); }
 
+    std::array<sf::Vector2f, 4> Zigga::getOrigins() 
+    {
+        std::array<sf::Vector2f, 4> origins;
+        for (int i = 0; i < 4; ++i)
+            origins[i] = this->tiles[i].getOrigin();
+        return origins;
+    }
+
+    std::array<Tile, 4> Zigga::getTiles() {
+        return this->tiles; }
+
     void Zigga::rotate(short dir) 
     {
         this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
@@ -81,39 +92,6 @@ namespace Geometile
 
     Sarru::~Sarru() { }
 
-    void Sarru::rotate(short dir) 
-    { 
-        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
-
-        switch (this->rot)
-        {
-        case Rotation::r0:
-            this->tiles[0].setOrigin(VF01);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF10);
-            this->tiles[3].setOrigin(VF20);
-            break;
-        case Rotation::r90:
-            this->tiles[0].setOrigin(VF10);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF21);
-            this->tiles[3].setOrigin(VF22);
-            break;
-        case Rotation::r180:
-            this->tiles[0].setOrigin(VF21);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF12);
-            this->tiles[3].setOrigin(VF02);
-            break;
-        case Rotation::r270:
-            this->tiles[0].setOrigin(VF12);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF01);
-            this->tiles[3].setOrigin(VF00);
-            break;
-        }
-    }
 
     Geometype Sarru::getType() {
         return Geometype::Sarru; }
@@ -126,6 +104,51 @@ namespace Geometile
         for (auto& tile : tiles)
             tile.setPosition(position); }
 
+    std::array<sf::Vector2f, 4> Sarru::getOrigins() 
+    {
+        std::array<sf::Vector2f, 4> origins;
+        for (int i = 0; i < 4; ++i)
+            origins[i] = this->tiles[i].getOrigin();
+        return origins;
+    }
+
+    std::array<Tile, 4> Sarru::getTiles() {
+        return this->tiles; }
+
+    void Sarru::rotate(short dir) 
+    { 
+        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
+            (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
+
+        switch (this->rot)
+        {
+            case Rotation::r0:
+                this->tiles[0].setOrigin(VF01);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF10);
+                this->tiles[3].setOrigin(VF20);
+                break;
+            case Rotation::r90:
+                this->tiles[0].setOrigin(VF10);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF21);
+                this->tiles[3].setOrigin(VF22);
+                break;
+            case Rotation::r180:
+                this->tiles[0].setOrigin(VF21);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF12);
+                this->tiles[3].setOrigin(VF02);
+                break;
+            case Rotation::r270:
+                this->tiles[0].setOrigin(VF12);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF01);
+                this->tiles[3].setOrigin(VF00);
+                break;
+        }
+    }
+    
     void Sarru::update() 
     {
         //something
@@ -146,40 +169,6 @@ namespace Geometile
 
     Jagga::~Jagga() { }
 
-    void Jagga::rotate(short dir) 
-    {
-        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
-
-        switch (this->rot)
-        {
-        case Rotation::r0:
-            this->tiles[0].setOrigin(VF10);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF12);
-            this->tiles[3].setOrigin(VF02);
-            break;
-        case Rotation::r90:
-            this->tiles[0].setOrigin(VF21);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF01);
-            this->tiles[3].setOrigin(VF00);
-            break;
-        case Rotation::r180:
-            this->tiles[0].setOrigin(VF12);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF10);
-            this->tiles[3].setOrigin(VF20);
-            break;
-        case Rotation::r270:
-            this->tiles[0].setOrigin(VF01);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF21);
-            this->tiles[3].setOrigin(VF22);
-            break;
-        }
-    }
-
     Geometype Jagga::getType() {
         return Geometype::Jagga; }
 
@@ -190,6 +179,51 @@ namespace Geometile
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
+
+    std::array<sf::Vector2f, 4> Jagga::getOrigins() 
+    {
+        std::array<sf::Vector2f, 4> origins;
+        for (int i = 0; i < 4; ++i)
+            origins[i] = this->tiles[i].getOrigin();
+        return origins;
+    }
+
+    std::array<Tile, 4> Jagga::getTiles() {
+        return this->tiles; }
+
+    void Jagga::rotate(short dir) 
+    {
+        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
+            (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
+
+        switch (this->rot)
+        {
+            case Rotation::r0:
+                this->tiles[0].setOrigin(VF10);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF12);
+                this->tiles[3].setOrigin(VF02);
+                break;
+            case Rotation::r90:
+                this->tiles[0].setOrigin(VF21);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF01);
+                this->tiles[3].setOrigin(VF00);
+                break;
+            case Rotation::r180:
+                this->tiles[0].setOrigin(VF12);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF10);
+                this->tiles[3].setOrigin(VF20);
+                break;
+            case Rotation::r270:
+                this->tiles[0].setOrigin(VF01);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF21);
+                this->tiles[3].setOrigin(VF22);
+                break;
+        }
+    }
 
     void Jagga::update() 
     {
@@ -211,40 +245,6 @@ namespace Geometile
 
     Lirru::~Lirru() { }
 
-    void Lirru::rotate(short dir) 
-    {
-        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
-
-        switch (this->rot)
-        {
-        case Rotation::r0:
-            this->tiles[0].setOrigin(VF10);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF12);
-            this->tiles[3].setOrigin(VF22);
-            break;
-        case Rotation::r90:
-            this->tiles[0].setOrigin(VF21);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF01);
-            this->tiles[3].setOrigin(VF02);
-            break;
-        case Rotation::r180:
-            this->tiles[0].setOrigin(VF12);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF10);
-            this->tiles[3].setOrigin(VF00);
-            break;
-        case Rotation::r270:
-            this->tiles[0].setOrigin(VF01);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF21);
-            this->tiles[3].setOrigin(VF20);
-            break;
-        }
-    }
-
     Geometype Lirru::getType() {
         return Geometype::Lirru; }
 
@@ -255,6 +255,51 @@ namespace Geometile
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
+
+    std::array<sf::Vector2f, 4> Lirru::getOrigins() 
+    {
+        std::array<sf::Vector2f, 4> origins;
+        for (int i = 0; i < 4; ++i)
+            origins[i] = this->tiles[i].getOrigin();
+        return origins;
+    }
+
+    std::array<Tile, 4> Lirru::getTiles() {
+        return this->tiles; }
+
+    void Lirru::rotate(short dir) 
+    {
+        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
+            (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
+
+        switch (this->rot)
+        {
+            case Rotation::r0:
+                this->tiles[0].setOrigin(VF10);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF12);
+                this->tiles[3].setOrigin(VF22);
+                break;
+            case Rotation::r90:
+                this->tiles[0].setOrigin(VF21);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF01);
+                this->tiles[3].setOrigin(VF02);
+                break;
+            case Rotation::r180:
+                this->tiles[0].setOrigin(VF12);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF10);
+                this->tiles[3].setOrigin(VF00);
+                break;
+            case Rotation::r270:
+                this->tiles[0].setOrigin(VF01);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF21);
+                this->tiles[3].setOrigin(VF20);
+                break;
+        }
+    }
 
     void Lirru::update() 
     {
@@ -276,40 +321,6 @@ namespace Geometile
 
     Terru::~Terru() { }
 
-    void Terru::rotate(short dir) 
-    {
-        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
-
-        switch (this->rot)
-        {
-        case Rotation::r0:
-            this->tiles[0].setOrigin(VF01);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF21);
-            this->tiles[3].setOrigin(VF12);
-            break;
-        case Rotation::r90:
-            this->tiles[0].setOrigin(VF10);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF12);
-            this->tiles[3].setOrigin(VF01);
-            break;
-        case Rotation::r180:
-            this->tiles[0].setOrigin(VF21);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF01);
-            this->tiles[3].setOrigin(VF10);
-            break;
-        case Rotation::r270:
-            this->tiles[0].setOrigin(VF12);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF10);
-            this->tiles[3].setOrigin(VF21);
-            break;
-        }
-    }
-
     Geometype Terru::getType() {
         return Geometype::Terru; }
 
@@ -320,6 +331,51 @@ namespace Geometile
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
+
+    std::array<sf::Vector2f, 4> Terru::getOrigins() 
+    {
+        std::array<sf::Vector2f, 4> origins;
+        for (int i = 0; i < 4; ++i)
+            origins[i] = this->tiles[i].getOrigin();
+        return origins;
+    }
+
+    std::array<Tile, 4> Terru::getTiles() {
+        return this->tiles; }
+
+    void Terru::rotate(short dir) 
+    {
+        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
+            (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
+
+        switch (this->rot)
+        {
+            case Rotation::r0:
+                this->tiles[0].setOrigin(VF01);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF21);
+                this->tiles[3].setOrigin(VF12);
+                break;
+            case Rotation::r90:
+                this->tiles[0].setOrigin(VF10);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF12);
+                this->tiles[3].setOrigin(VF01);
+                break;
+            case Rotation::r180:
+                this->tiles[0].setOrigin(VF21);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF01);
+                this->tiles[3].setOrigin(VF10);
+                break;
+            case Rotation::r270:
+                this->tiles[0].setOrigin(VF12);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF10);
+                this->tiles[3].setOrigin(VF21);
+                break;
+        }
+    }
 
     void Terru::update() 
     {
@@ -341,40 +397,6 @@ namespace Geometile
 
     Iggu::~Iggu() { }
 
-    void Iggu::rotate(short dir) 
-    {
-        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
-
-        switch (this->rot)
-        {
-        case Rotation::r0:
-            this->tiles[0].setOrigin(VF02);
-            this->tiles[1].setOrigin(VF12);
-            this->tiles[2].setOrigin(VF22);
-            this->tiles[3].setOrigin(VF32);
-            break;
-        case Rotation::r90:
-            this->tiles[0].setOrigin(VF10);
-            this->tiles[1].setOrigin(VF11);
-            this->tiles[2].setOrigin(VF12);
-            this->tiles[3].setOrigin(VF13);
-            break;
-        case Rotation::r180:
-            this->tiles[0].setOrigin(VF31);
-            this->tiles[1].setOrigin(VF21);
-            this->tiles[2].setOrigin(VF11);
-            this->tiles[3].setOrigin(VF01);
-            break;
-        case Rotation::r270:
-            this->tiles[0].setOrigin(VF23);
-            this->tiles[1].setOrigin(VF22);
-            this->tiles[2].setOrigin(VF21);
-            this->tiles[3].setOrigin(VF20);
-            break;
-        }
-    }
-
     Geometype Iggu::getType() {
         return Geometype::Iggu; }
 
@@ -385,6 +407,51 @@ namespace Geometile
         this->position = position;
         for (auto& tile : tiles)
             tile.setPosition(position); }
+
+    std::array<sf::Vector2f, 4> Iggu::getOrigins() 
+    {
+        std::array<sf::Vector2f, 4> origins;
+        for (int i = 0; i < 4; ++i)
+            origins[i] = this->tiles[i].getOrigin();
+        return origins;
+    }
+
+    std::array<Tile, 4> Iggu::getTiles() {
+        return this->tiles; }
+
+    void Iggu::rotate(short dir) 
+    {
+        this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
+            (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
+
+        switch (this->rot)
+        {
+            case Rotation::r0:
+                this->tiles[0].setOrigin(VF02);
+                this->tiles[1].setOrigin(VF12);
+                this->tiles[2].setOrigin(VF22);
+                this->tiles[3].setOrigin(VF32);
+                break;
+            case Rotation::r90:
+                this->tiles[0].setOrigin(VF10);
+                this->tiles[1].setOrigin(VF11);
+                this->tiles[2].setOrigin(VF12);
+                this->tiles[3].setOrigin(VF13);
+                break;
+            case Rotation::r180:
+                this->tiles[0].setOrigin(VF31);
+                this->tiles[1].setOrigin(VF21);
+                this->tiles[2].setOrigin(VF11);
+                this->tiles[3].setOrigin(VF01);
+                break;
+            case Rotation::r270:
+                this->tiles[0].setOrigin(VF23);
+                this->tiles[1].setOrigin(VF22);
+                this->tiles[2].setOrigin(VF21);
+                this->tiles[3].setOrigin(VF20);
+                break;
+        }
+    }
 
     void Iggu::update() 
     {
@@ -406,10 +473,32 @@ namespace Geometile
 
     Orra::~Orra() { }
 
+    Geometype Orra::getType() {
+        return Geometype::Orra; }
+
+    sf::Vector2f Orra::getPosition() {
+        return this->position; }
+
+    void Orra::setPosition(const sf::Vector2f& position) {
+        this->position = position;
+        for (auto& tile : tiles)
+            tile.setPosition(position); }
+
+    std::array<sf::Vector2f, 4> Orra::getOrigins() 
+    {
+        std::array<sf::Vector2f, 4> origins;
+        for (int i = 0; i < 4; ++i)
+            origins[i] = this->tiles[i].getOrigin();
+        return origins;
+    }
+
+    std::array<Tile, 4> Orra::getTiles() {
+        return this->tiles; }
+
     void Orra::rotate(short dir) 
     {
         this->rot = (dir > 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot + 1) % 4) :
-                    (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
+            (dir < 0) ? static_cast<Rotation>(static_cast<uint8_t>(this->rot - 1) % 4) : this->rot;
 
         //switch (this->rot)
         //{
@@ -439,17 +528,6 @@ namespace Geometile
         //    break;
         //}
     }
-
-    Geometype Orra::getType() {
-        return Geometype::Orra; }
-
-    sf::Vector2f Orra::getPosition() {
-        return this->position; }
-
-    void Orra::setPosition(const sf::Vector2f& position) {
-        this->position = position;
-        for (auto& tile : tiles)
-            tile.setPosition(position); }
 
     void Orra::update() 
     {

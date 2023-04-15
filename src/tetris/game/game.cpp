@@ -49,6 +49,10 @@ void Game::update()
 {
     this->pollEvent();
     this->state->update();
+
+    //auto nextState = this->state->getNextState();
+    //if (nextState.has_value())
+    //    this->state = std::move(nextState.value());
 }
 
 void Game::render()

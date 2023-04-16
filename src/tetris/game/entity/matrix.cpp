@@ -35,37 +35,46 @@ void Matrix::initMetrices()
 const sf::Vector2f& Matrix::getPosition() {
     return this->position; }
 
-sf::Vector2i Matrix::getGeometilePos(std::unique_ptr<Geometile::Geometile>& geometile)
-{
-    sf::Vector2f result = (geometile->getPosition() - this->position) / TILE_SIZE;
-    return static_cast<sf::Vector2i>(result);
-}
+sf::Vector2i Matrix::getGeometilePos(std::unique_ptr<Geometile::Geometile>& geometile) {
+    return static_cast<sf::Vector2i>((geometile->getPosition() - this->position) / TILE_SIZE); }
 
-sf::Vector2f Matrix::getGhostPos(std::unique_ptr<Geometile::Geometile>& controlled)
+sf::Vector2i Matrix::getPosInMatrix(const sf::Vector2f& pos) {
+    return static_cast<sf::Vector2i>((pos - this->position) / TILE_SIZE); }
+
+bool Matrix::isValidAndInBound(std::unique_ptr<Geometile::Geometile>& geometile, const sf::Vector2f& nextPos)
 {
-    sf::Vector2i pos = this->getGeometilePos(controlled);
-    int tilePos = pos.y * 10 + pos.x;
-    std::array<sf::Vector2f, 4> geoTiles = controlled->getOrigins();
-    std::array<int, 4> tilesPos{};
+    sf::Vector2i posInMatrix = this->getPosInMatrix(nextPos);
+    int tileIndex = posInMatrix.y * 10 + posInMatrix.x;
+    std::array<sf::Vector2f, 4> geoTiles = geometile->getOrigins();
     for (int i = 0; i < 4; ++i)
-        tilesPos[i] = tilePos + geoTiles[i].y * 10 + geoTiles[i].x;
+        if (!this->isValidAndInBound(posInMatrix.x + geoTiles[i].x,posInMatrix.y +  geoTiles[i].y))
+            return false;
 
-    while (true) 
-    {
-        for (int i = 0; i < 4; ++i)
-        {
-            tilesPos[i] += 10;
-            if (tilesPos[i] >= 200 || this->tiles[tilesPos[i]] != std::nullopt) 
-                return sf::Vector2f(tilePos % 10, static_cast<int>(tilePos / 10.)) * TILE_SIZE + this->position;
-        }
-
-        tilePos += 10;
-    }
-
-    return sf::Vector2f(tilePos % 10, static_cast<int>(tilePos / 10.)) * TILE_SIZE + this->position;
+    return true;
 }
 
-void Matrix::fillWithGeometile(std::unique_ptr<Geometile::Geometile>& geometile)
+bool Matrix::isValidAndInBound(const sf::Vector2f& position)
+{
+    auto pos = (position - this->position) / TILE_SIZE;
+    return this->isValidAndInBound(pos.x, pos.y);
+}
+
+bool Matrix::isValidAndInBound(int x, int y)
+{
+    if (0 > x || x >= 10 || 0 > y || y >= 20)
+        return false;
+    auto pos = y * 10 + x;
+    return isValidAndInBound(pos);
+}
+
+bool Matrix::isValidAndInBound(int index)
+{
+    if (0 > index || index >= 200)
+        return false;
+    return this->tiles[index] == std::nullopt;
+}
+
+void Matrix::fillWithGeometile(std::unique_ptr<Geometile::Geometile> geometile)
 {
     auto geoTiles = geometile->getTiles();
     auto geoPos = this->getGeometilePos(geometile);

@@ -25,6 +25,14 @@ enum Rotation
     r270,
 };
 
+enum Direction 
+{
+    Up,
+    Right,
+    Left,
+    Down,
+};
+
 namespace Geometile
 {
     class Geometile

@@ -25,10 +25,15 @@ public:
     Matrix(const sf::Vector2f& pos);
     ~Matrix();
 
-    void fillWithGeometile(std::unique_ptr<Geometile::Geometile>& geometile);
+    void fillWithGeometile(std::unique_ptr<Geometile::Geometile> geometile);
     
     sf::Vector2i getGeometilePos(std::unique_ptr<Geometile::Geometile>& geometile);
-    sf::Vector2f getGhostPos(std::unique_ptr<Geometile::Geometile>& controlled);
+    sf::Vector2i getPosInMatrix(const sf::Vector2f& pos);
+
+    bool isValidAndInBound(const sf::Vector2f& position);
+    bool isValidAndInBound(std::unique_ptr<Geometile::Geometile>& geometile, const sf::Vector2f& nextPos);
+    bool isValidAndInBound(int x, int y);
+    bool isValidAndInBound(int index);
 
     const sf::Vector2f& getPosition();
 

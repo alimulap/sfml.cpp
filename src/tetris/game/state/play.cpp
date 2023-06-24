@@ -6,10 +6,11 @@ namespace State
 Play::Play()
     : matrix(sf::Vector2f(0., 0.))
 {
-    this->clock.restart();
+    this->automaticMoveClock.restart();
 
     this->controlled = std::make_unique<Geometile::Zigga>(this->matrix.getPosition() + sf::Vector2f(0., 0.) * TILE_SIZE, TILE_SIZE);
     this->ghost = std::make_unique<Geometile::Zigga>(this->matrix.getPosition() + sf::Vector2f(0., 0.) * TILE_SIZE, TILE_SIZE);
+    this->updateGhost();
     this->ikan = std::make_unique<Geometile::Zigga>(this->matrix.getPosition() + sf::Vector2f(3., 10.) * TILE_SIZE, TILE_SIZE);
     this->matrix.fillWithGeometile(std::move(this->ikan).value());
 }
@@ -19,31 +20,70 @@ Play::~Play() { }
 void Play::geometileController()
 {
     //\> move down
-    if (this->clock.getElapsedTime().asSeconds() > 1.f) 
+    if (this->automaticMoveClock.getElapsedTime().asSeconds() > 1.f) 
     {
-        this->clock.restart();
+        this->automaticMoveClock.restart();
         this->moveControlled(Direction::Down);
         this->updateGhost();
     }
 
-    //\> move horizontal
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        if (!this->moved) {
+    this->moved = false;
+
+    //\> move control
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) 
+    {
+        this->moved = true;
+        if (this->moveAction == Direction::None)
+        {
+            this->moveAction = Direction::Right;
+            this->moveClock.restart();
             this->moveControlled(Direction::Right);
             this->updateGhost();
-            this->moved = true;
         }
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        if (!this->moved) {
+        if (this->moveAction == Direction::Right && this->moveClock.getElapsedTime().asSeconds() > 0.1f) {
+            this->moveControlled(Direction::Right);
+            this->updateGhost();
+            this->moveClock.restart();
+        }
+    } 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
+    {
+        this->moved = true;
+        if (this->moveAction == Direction::None)
+        {
+            this->moveAction = Direction::Left;
+            this->moveClock.restart();
             this->moveControlled(Direction::Left);
             this->updateGhost();
-            this->moved = true;
         }
-    } else {
-        this->moved = false;
+        if (this->moveAction == Direction::Left && this->moveClock.getElapsedTime().asSeconds() > 0.1f) {
+            this->moveControlled(Direction::Left);
+            this->updateGhost();
+            this->moveClock.restart();
+        }
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) 
+    {
+        this->moved = true;
+        if (this->moveAction == Direction::None)
+        {
+            this->moveAction = Direction::Down;
+            this->moveClock.restart();
+            this->moveControlled(Direction::Down);
+            this->updateGhost();
+        }
+        if (this->moveAction == Direction::Down && this->moveClock.getElapsedTime().asSeconds() > 0.1f) {
+            this->moveControlled(Direction::Down);
+            this->updateGhost();
+            this->moveClock.restart();
+        }
     }
 
-    //\> move vertical
+    if (!this->moved) {
+        this->moveClock.restart();
+        this->moveAction = Direction::None; }
+
+    //\> rotate
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         if (!this->rotated) {
             this->controlled.value()->rotate( 1);

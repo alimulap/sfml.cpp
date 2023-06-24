@@ -17,7 +17,8 @@ namespace State
 class Play : public State
 {
 private:
-    sf::Clock clock;
+    sf::Clock automaticMoveClock;
+    sf::Clock moveClock;
 
     Matrix matrix;
 
@@ -26,6 +27,8 @@ private:
     std::optional<std::unique_ptr<Geometile::Geometile>> ikan;
 
     std::optional<std::unique_ptr<State>> nextState = std::nullopt;
+
+    Direction moveAction = Direction::None;
 
     bool moved = false;
     bool rotated = false;

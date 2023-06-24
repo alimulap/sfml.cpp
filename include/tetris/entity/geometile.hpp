@@ -31,6 +31,7 @@ enum Direction
     Right,
     Left,
     Down,
+    None,
 };
 
 namespace Geometile

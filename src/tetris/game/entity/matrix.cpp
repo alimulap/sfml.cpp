@@ -44,7 +44,6 @@ sf::Vector2i Matrix::getPosInMatrix(const sf::Vector2f& pos) {
 bool Matrix::isValidAndInBound(std::unique_ptr<Geometile::Geometile>& geometile, const sf::Vector2f& nextPos)
 {
     sf::Vector2i posInMatrix = this->getPosInMatrix(nextPos);
-    int tileIndex = posInMatrix.y * 10 + posInMatrix.x;
     std::array<sf::Vector2f, 4> geoTiles = geometile->getOrigins();
     for (int i = 0; i < 4; ++i)
         if (!this->isValidAndInBound(posInMatrix.x + geoTiles[i].x,posInMatrix.y +  geoTiles[i].y))

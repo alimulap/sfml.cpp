@@ -1,0 +1,3 @@
+namespace bloom {
+    int main();
+}
